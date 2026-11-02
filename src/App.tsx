@@ -1,6 +1,8 @@
 import { CardEditorPage } from './pages/CardEditorPage';
 import { DeckPage } from './pages/DeckPage';
 import { HomePage } from './pages/HomePage';
+import { SettingsPage } from './pages/SettingsPage';
+import { StatsPage } from './pages/StatsPage';
 import { StudyPage } from './pages/StudyPage';
 import { useRoute } from './lib/router';
 
@@ -19,6 +21,12 @@ export default function App() {
     case 'study':
       page = <StudyPage key={param} deckId={param ?? 'all'} />;
       break;
+    case 'stats':
+      page = <StatsPage />;
+      break;
+    case 'settings':
+      page = <SettingsPage key={location.hash} />;
+      break;
     default:
       page = <HomePage />;
   }
@@ -32,6 +40,12 @@ export default function App() {
         <nav>
           <a href="#/" className={!section ? 'active' : ''}>
             Start
+          </a>
+          <a href="#/stats" className={section === 'stats' ? 'active' : ''}>
+            Statistik
+          </a>
+          <a href="#/settings" className={section === 'settings' ? 'active' : ''} aria-label="Einstellungen">
+            ⚙︎
           </a>
         </nav>
       </header>

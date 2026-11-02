@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react';
 import { DueBadges } from '../components/DueBadges';
+import { getLastBackup } from '../lib/backupReminder';
 import { createDeck } from '../lib/db';
 import { useOverview } from '../lib/hooks';
 import { navigate } from '../lib/router';
@@ -12,6 +13,9 @@ export function HomePage() {
   if (!overview) return <p className="muted">Lade …</p>;
 
   const total = overview.reduce((n, o) => n + o.due.total, 0);
+  const cardCount = overview.reduce((n, o) => n + o.cardCount, 0);
+  const lastBackup = getLastBackup();
+  const backupDue = cardCount >= 20 && (!lastBackup || Date.now() - lastBackup > 14 * 86_400_000);
 
   async function onCreate(e: FormEvent) {
     e.preventDefault();
@@ -91,6 +95,13 @@ export function HomePage() {
         <button className="btn-block" onClick={() => setAdding(true)}>
           + Neuer Stapel
         </button>
+      )}
+
+      {backupDue && (
+        <p className="card-box notice small">
+          💾 Dein letztes Backup ist über zwei Wochen her (oder es gibt noch keins).{' '}
+          <a href="#/settings">Jetzt sichern</a>
+        </p>
       )}
 
       {overview.length > 0 && (

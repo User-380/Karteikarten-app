@@ -467,3 +467,93 @@ code {
   margin-top: 24px;
   padding: 28px 16px;
 }
+
+/* ---------- Statistik ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+@media (min-width: 560px) {
+  .stat-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.stat {
+  text-align: center;
+  padding: 14px 8px;
+}
+.stat-num {
+  font-size: 1.7rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 140px;
+  margin-bottom: 6px;
+}
+.bar {
+  flex: 1;
+  min-height: 2px;
+  background: var(--primary);
+  opacity: 0.75;
+  border-radius: 3px 3px 0 0;
+}
+.bar-today {
+  opacity: 1;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table td {
+  padding: 6px 2px;
+  border-bottom: 1px solid var(--border);
+}
+.table tr:last-child td {
+  border-bottom: none;
+}
+.table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Einstellungen ---------- */
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background: var(--surface-2);
+  padding: 4px;
+  border-radius: 12px;
+}
+.segmented button {
+  border: none;
+  background: transparent;
+}
+.segmented button.active {
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  font-weight: 600;
+}
+.check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 400;
+}
+.check input {
+  width: 20px;
+  height: 20px;
+}
+.notice {
+  margin: 12px 0;
+  border-color: var(--primary);
+}
+.notice-error {
+  border-color: var(--danger);
+  color: var(--danger);
+}
