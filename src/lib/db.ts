@@ -107,7 +107,11 @@ export async function resetCard(id: string): Promise<void> {
  * Bewertet eine Karte, speichert den neuen Termin und schreibt das Protokoll.
  * Gibt die aktualisierte Karte zurück.
  */
-export async function answerCard(card: Card, rating: Rating, now = Date.now()): Promise<Card> {
+export async function answerCard(
+  card: Card,
+  rating: Rating,
+  now = Date.now(),
+): Promise<{ card: Card; logId: number }> {
   const next: Card = { ...card, ...review(scheduleOf(card), rating, now) };
   const log: ReviewLogEntry = {
     cardId: card.id,
@@ -118,11 +122,20 @@ export async function answerCard(card: Card, rating: Rating, now = Date.now()): 
     day: dayKey(now),
     scheduledDays: next.scheduledDays,
   };
+  let logId = 0;
   await db.transaction('rw', db.cards, db.reviews, async () => {
     await db.cards.put(next);
-    await db.reviews.add(log);
+    logId = await db.reviews.add(log);
   });
-  return next;
+  return { card: next, logId };
+}
+
+/** Letzte Bewertung rückgängig machen: alte Kartenwerte zurück, Protokolleintrag weg. */
+export async function undoAnswer(previous: Card, logId: number): Promise<void> {
+  await db.transaction('rw', db.cards, db.reviews, async () => {
+    await db.cards.put(previous);
+    await db.reviews.delete(logId);
+  });
 }
 
 /** Wie viele neue Karten wurden heute je Stapel schon gelernt? */

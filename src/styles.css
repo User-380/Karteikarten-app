@@ -382,3 +382,88 @@ code {
   border-radius: 5px;
   font-size: 0.9em;
 }
+
+/* ---------- Lernmodus ---------- */
+.study {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-height: calc(100dvh - 100px);
+}
+.study-head {
+  flex-wrap: nowrap;
+}
+.study-deck {
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.badge.is-current {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.study-card {
+  flex: 1;
+  padding: 20px 16px;
+  text-align: center;
+}
+.study-card .content {
+  font-size: 1.25rem;
+}
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 18px 0;
+}
+.study-actions {
+  position: sticky;
+  bottom: 0;
+  background: var(--bg);
+  padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+}
+.rate-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.rate-btn {
+  flex-direction: column;
+  gap: 2px;
+  min-height: 72px;
+  padding: 6px 4px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+}
+.rate-label {
+  font-size: 1.02rem;
+}
+.rate-ivl {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+.rate-again {
+  background: var(--again);
+}
+.rate-hard {
+  background: var(--hard);
+}
+.rate-good {
+  background: var(--good);
+}
+.rate-easy {
+  background: var(--easy);
+}
+.study-foot {
+  margin-top: 8px;
+}
+.study-done {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 24px;
+  padding: 28px 16px;
+}

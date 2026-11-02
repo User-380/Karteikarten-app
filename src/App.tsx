@@ -1,6 +1,7 @@
 import { CardEditorPage } from './pages/CardEditorPage';
 import { DeckPage } from './pages/DeckPage';
 import { HomePage } from './pages/HomePage';
+import { StudyPage } from './pages/StudyPage';
 import { useRoute } from './lib/router';
 
 export default function App() {
@@ -14,6 +15,9 @@ export default function App() {
       break;
     case 'card':
       page = <CardEditorPage key={location.hash} cardId={param ?? 'new'} />;
+      break;
+    case 'study':
+      page = <StudyPage key={param} deckId={param ?? 'all'} />;
       break;
     default:
       page = <HomePage />;

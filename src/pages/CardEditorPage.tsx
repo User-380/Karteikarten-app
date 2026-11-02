@@ -58,6 +58,8 @@ export function CardEditorPage({ cardId }: { cardId: string }) {
       setFormKey((k) => k + 1);
       setSavedMsg('Gespeichert ✓');
       setTimeout(() => setSavedMsg(''), 1500);
+    } else if (!isNew && history.length > 1) {
+      history.back(); // zurück dorthin, wo man herkam (z. B. Lernmodus)
     } else {
       navigate(`/deck/${deckId}`);
     }
